@@ -1,0 +1,105 @@
+{
+  "name": "colorComments",
+  "publisher": "pasztet211",
+  "displayName": "Color Comments",
+  "description": "Customize the colors of comments in VS Code",
+  "version": "1.1.0",
+  "engines": {
+    "vscode": "^1.138.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Color Comments",
+      "properties": {
+        "colorComments.globalColor": {
+          "type": "string",
+          "default": "",
+          "description": "Color used for comments without a specific marker.",
+          "format": "color"
+        },
+        "colorComments.todoColor": {
+          "type": "string",
+          "default": "#ffcc00",
+          "description": "Color for TODO comments."
+        },
+        "colorComments.fixColor": {
+          "type": "string",
+          "default": "#ff5555",
+          "description": "Color for FIX comments."
+        },
+        "colorComments.noteColor": {
+          "type": "string",
+          "default": "#55aaff",
+          "description": "Color for NOTE comments."
+        },
+        "colorComments.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Color Comments."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "colorComments.reload",
+        "title": "Color Comments: Reload"
+      },
+      {
+        "command": "colorComments.enable",
+        "title": "Color Comments: Enable"
+      },
+      {
+        "command": "colorComments.disable",
+        "title": "Color Comments: Disable"
+      },
+      {
+        "command": "colorComments.openSettings",
+        "title": "Color Comments: Open Settings"
+      },
+      {
+        "command": "colorComments.tokenTest",
+        "title": "Color Comments: Token Test"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "@types/vscode": "^1.138.0",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0",
+    "copy-webpack-plugin": "^14.0.0",
+    "eslint": "^10.5.0",
+    "ts-loader": "^9.6.2",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.1",
+    "webpack": "^5.107.2",
+    "webpack-cli": "^7.0.3"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  },
+  "dependencies": {
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.3.2"
+  }
+}
