@@ -1,4 +1,16 @@
-export function getGrammar(languageId: string) {
+type Grammar = {
+    scopeName: string;
+    patterns: {
+        name?: string;
+        match?: string;
+        begin?: string;
+        end?: string;
+        contentName?: string;
+        patterns?: Grammar['patterns'];
+    }[];
+};
+
+export function getGrammar(languageId: string): Grammar | undefined {
     if (languageId === 'python') {
         return {
             scopeName: 'source.python',
@@ -73,6 +85,12 @@ export function getGrammar(languageId: string) {
                     name: 'comment.block',
                     begin: '<!--',
                     end: '-->'
+                },
+                {
+                    begin: '<script\\b[^>]*>',
+                    end: '</script\\s*>',
+                    contentName: 'source.javascript',
+                    patterns: getGrammar('javascript')?.patterns ?? []
                 }
             ]
         };
@@ -83,13 +101,13 @@ export function getGrammar(languageId: string) {
             scopeName: 'source.lua',
             patterns: [
                 {
-                    name: 'comment.line.double-dash',
-                    match: '--.*$'
-                },
-                {
                     name: 'comment.block',
                     begin: '--\\[\\[',
                     end: '\\]\\]'
+                },
+                {
+                    name: 'comment.line.double-dash',
+                    match: '--.*$'
                 }
             ]
         };
