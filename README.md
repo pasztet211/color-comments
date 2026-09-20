@@ -1,5 +1,5 @@
 ![version](https://img.shields.io/badge/version-v1.1.1-orange?style=flat-square)
-![size](https://img.shields.io/badge/size-197Kb-blue?style=flat-square)
+![size](https://img.shields.io/badge/size-~200KB-blue?style=flat-square)
 
 # Color Comments
 
@@ -41,8 +41,5 @@ console.log("// todo") //this message will not change color
 - rust
 - kotlin
 - swift
-- html [^first]
+- html (both scripts and main file work as their respective languages)
 - lua
-
-
-[^first]: both scripts and main file work as their respective languages
