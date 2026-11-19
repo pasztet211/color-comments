@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import { createRegistry, tokenize } from './textmate';
 import { testCurrentFile } from './tokenTest';
 
-const markerRegex = /\b(TODO|FIX|NOTE)\b/gi;
+const markerRegex = /\b(TODO|FIX|NOTE|ADD)\b/gi;
 
 export async function activate(context: vscode.ExtensionContext) {
     try {
@@ -41,6 +41,10 @@ export async function activate(context: vscode.ExtensionContext) {
 
         NOTE: vscode.window.createTextEditorDecorationType({
             color: rules.NOTE || '#55aaff'
+        }),
+
+        ADD: vscode.window.createTextEditorDecorationType({
+            color: rules.ADD || '#55ff55'
         })
     };
 
@@ -55,6 +59,7 @@ export async function activate(context: vscode.ExtensionContext) {
             editor.setDecorations(decorations.TODO, []);
             editor.setDecorations(decorations.FIX, []);
             editor.setDecorations(decorations.NOTE, []);
+            editor.setDecorations(decorations.ADD, []);
 
             if (globalDecoration) {
                 editor.setDecorations(globalDecoration, []);
@@ -73,7 +78,8 @@ export async function activate(context: vscode.ExtensionContext) {
             global: [],
             TODO: [],
             FIX: [],
-            NOTE: []
+            NOTE: [],
+            ADD: []
         };
 
         for (const { lineNumber, line, token } of tokens) {
@@ -114,6 +120,7 @@ export async function activate(context: vscode.ExtensionContext) {
         editor.setDecorations(decorations.TODO, ranges.TODO);
         editor.setDecorations(decorations.FIX, ranges.FIX);
         editor.setDecorations(decorations.NOTE, ranges.NOTE);
+        editor.setDecorations(decorations.ADD, ranges.ADD);
 
         if (globalDecoration) {
             editor.setDecorations(globalDecoration, ranges.global);
@@ -222,7 +229,8 @@ export async function activate(context: vscode.ExtensionContext) {
 
         decorations.TODO,
         decorations.FIX,
-        decorations.NOTE
+        decorations.NOTE,
+        decorations.ADD
     );
     } catch (error) {
         vscode.window.showErrorMessage(

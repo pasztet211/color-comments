@@ -15,6 +15,7 @@ e.g.
 //todo: this comment will be yellow unless changed in settings
 //note: as todo this comment will be blue unless changed
 //fix:  as previously this one is red unless changed
+//add: as said this one is a pastel green until changed
 
 console.log("// todo") //this message will not change color
 
@@ -24,6 +25,7 @@ console.log("// todo") //this message will not change color
     * todo color
     * fix color
     * note color
+    * add color
     * global non special comment color
 
 - you can disable the extension in its settings or with `Color Comments: Disable`
