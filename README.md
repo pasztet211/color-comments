@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/version-v1.1.1-orange?style=flat-square)
+![version](https://img.shields.io/badge/version-v1.2.1-orange?style=flat-square)
 ![size](https://img.shields.io/badge/size-~600KB-blue?style=flat-square)
 
 # Color Comments
