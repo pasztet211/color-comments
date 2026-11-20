@@ -11,6 +11,7 @@ export const languageIds = [
     'typescript',
     'c',
     'cpp',
+    'cs',
     'java',
     'csharp',
     'go',
@@ -19,7 +20,8 @@ export const languageIds = [
     'swift',
     'html',
     'lua',
-    'markdown'
+    'markdown',
+    'sql'
 ];
 
 export async function createRegistry() {

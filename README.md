@@ -1,5 +1,4 @@
-![version](https://img.shields.io/badge/version-v1.3.1-orange?style=flat-square)
-![size](https://img.shields.io/badge/size-~600KB-blue?style=flat-square)
+![version](https://img.shields.io/badge/version-v1.4.1-orange?style=flat-square)
 
 # Color Comments
 
@@ -37,6 +36,7 @@ console.log("// todo") //this message will not change color
 - typescript
 - c
 - cpp
+- csharp
 - java
 - csharp
 - go
@@ -45,4 +45,5 @@ console.log("// todo") //this message will not change color
 - swift
 - html (both scripts and main file work as their respective languages)
 - lua
+- sql
 - markdown fenced blocks

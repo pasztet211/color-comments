@@ -47,7 +47,8 @@ export function getGrammar(languageId: string): Grammar | undefined {
         languageId === 'kotlin' ||
         languageId === 'swift' ||
         languageId === 'javascript' ||
-        languageId === 'typescript'
+        languageId === 'typescript' ||
+        languageId === 'cs'
     ) {
         return {
             scopeName: `source.${languageId}`,
@@ -123,6 +124,45 @@ export function getGrammar(languageId: string): Grammar | undefined {
         };
     }
 
+    if (languageId === 'sql') {
+        return {
+            scopeName: 'source.sql',
+            patterns: [
+                {
+                    name: 'string.quoted.double',
+                    begin: '"',
+                    end: '"',
+                    patterns: [
+                        {
+                            name: 'constant.character.escape',
+                            match: '\\\\.'
+                        }
+                    ]
+                },
+                {
+                    name: 'string.quoted.single',
+                    begin: '\'',
+                    end: '\'',
+                    patterns: [
+                        {
+                            name: 'constant.character.escape',
+                            match: '\\\\.'
+                        }
+                    ]
+                },
+                {
+                    name: 'comment.line.double-dash',
+                    match: '--.*$'
+                },
+                {
+                    name: 'comment.block',
+                    begin: '/\\*',
+                    end: '\\*/'
+                }
+            ]
+        }
+    }
+
     if (languageId === 'markdown') {
         const fencedLanguages = [
             {
@@ -144,6 +184,10 @@ export function getGrammar(languageId: string): Grammar | undefined {
             {
                 aliases: ['cpp', 'c\\+\\+'],
                 languageId: 'cpp'
+            },
+            {
+                aliases: ['cs', 'c#', 'csharp'],
+                languageId: 'cs'
             },
             {
                 aliases: ['java'],
@@ -176,6 +220,10 @@ export function getGrammar(languageId: string): Grammar | undefined {
             {
                 aliases: ['lua'],
                 languageId: 'lua'
+            },
+            {
+                aliases: ['sql'],
+                languageId: 'sql'
             }
         ];
 
