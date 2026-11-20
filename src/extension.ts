@@ -2,8 +2,8 @@ import * as vscode from 'vscode';
 import { createRegistry, tokenize } from './textmate';
 import { testCurrentFile } from './tokenTest';
 
-const markerRegex = /\b(TODO|FIX|NOTE|ADD)\b/gi;
-const doneMarkerRegex = /\b(FIX|ADD)ED\b/gi;
+const markerRegex = /\b(TODO|FIX|NOTE|ADD)\b/i;
+const doneMarkerRegex = /\b(FIX|ADD)ED\b/i;
 
 export async function activate(context: vscode.ExtensionContext) {
     try {
@@ -27,27 +27,37 @@ export async function activate(context: vscode.ExtensionContext) {
             globalDecoration = undefined;
         }
     }
-    const rules = vscode.workspace
-        .getConfiguration('colorComments')
-        .get<Record<string, string>>('rules', {});
+    const configuration = vscode.workspace.getConfiguration('colorComments');
 
-    const decorations = {
+    function createDecorations() {
+        return {
         TODO: vscode.window.createTextEditorDecorationType({
-            color: rules.TODO || '#ffcc00'
+            color: configuration.get<string>('todoColor', '#ffcc00')
         }),
 
         FIX: vscode.window.createTextEditorDecorationType({
-            color: rules.FIX || '#ff5555'
+            color: configuration.get<string>('fixColor', '#ff5555')
         }),
 
         NOTE: vscode.window.createTextEditorDecorationType({
-            color: rules.NOTE || '#55aaff'
+            color: configuration.get<string>('noteColor', '#55aaff')
         }),
 
         ADD: vscode.window.createTextEditorDecorationType({
-            color: rules.ADD || '#55ff55'
+            color: configuration.get<string>('addColor', '#55ff55')
         })
-    };
+        };
+    }
+
+    let decorations = createDecorations();
+
+    function updateDecorations() {
+        decorations.TODO.dispose();
+        decorations.FIX.dispose();
+        decorations.NOTE.dispose();
+        decorations.ADD.dispose();
+        decorations = createDecorations();
+    }
 
     updateGlobalDecoration();
 
@@ -57,7 +67,7 @@ export async function activate(context: vscode.ExtensionContext) {
             .get<boolean>('enabled', true);
         const grammaticallyDoneOn = vscode.workspace
             .getConfiguration('colorComments')
-            .get<boolean>('gramatically-done-on', true);
+            .get<boolean>('gramatically-done-on', false);
 
         if (!enabled) {
             editor.setDecorations(decorations.TODO, []);
@@ -148,6 +158,7 @@ export async function activate(context: vscode.ExtensionContext) {
     const reloadCommand = vscode.commands.registerCommand(
         'colorComments.reload',
         () => {
+            updateDecorations();
             updateGlobalDecoration();
             updateActiveEditor();
             vscode.window.showInformationMessage(
@@ -219,6 +230,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
         vscode.workspace.onDidChangeConfiguration(event => {
             if (event.affectsConfiguration('colorComments')) {
+                updateDecorations();
                 updateGlobalDecoration();
                 updateActiveEditor();
             }
@@ -232,10 +244,15 @@ export async function activate(context: vscode.ExtensionContext) {
             }
         }),
 
-        decorations.TODO,
-        decorations.FIX,
-        decorations.NOTE,
-        decorations.ADD
+        {
+            dispose() {
+                decorations.TODO.dispose();
+                decorations.FIX.dispose();
+                decorations.NOTE.dispose();
+                decorations.ADD.dispose();
+                globalDecoration?.dispose();
+            }
+        }
     );
     } catch (error) {
         vscode.window.showErrorMessage(
