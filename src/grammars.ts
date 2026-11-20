@@ -6,6 +6,16 @@ type Grammar = {
         begin?: string;
         end?: string;
         contentName?: string;
+        beginCaptures?: {
+            [capture: number]: {
+                name: string;
+            };
+        };
+        endCaptures?: {
+            [capture: number]: {
+                name: string;
+            };
+        };
         patterns?: Grammar['patterns'];
     }[];
 };
@@ -111,6 +121,97 @@ export function getGrammar(languageId: string): Grammar | undefined {
                 }
             ]
         };
+    }
+
+    if (languageId === 'markdown') {
+        const fencedLanguages = [
+            {
+                aliases: ['py', 'python'],
+                languageId: 'python'
+            },
+            {
+                aliases: ['js', 'javascript'],
+                languageId: 'javascript'
+            },
+            {
+                aliases: ['ts', 'typescript'],
+                languageId: 'typescript'
+            },
+            {
+                aliases: ['c'],
+                languageId: 'c'
+            },
+            {
+                aliases: ['cpp', 'c\\+\\+'],
+                languageId: 'cpp'
+            },
+            {
+                aliases: ['java'],
+                languageId: 'java'
+            },
+            {
+                aliases: ['cs', 'csharp', 'c\\#'],
+                languageId: 'csharp'
+            },
+            {
+                aliases: ['go'],
+                languageId: 'go'
+            },
+            {
+                aliases: ['rs', 'rust'],
+                languageId: 'rust'
+            },
+            {
+                aliases: ['kt', 'kotlin'],
+                languageId: 'kotlin'
+            },
+            {
+                aliases: ['swift'],
+                languageId: 'swift'
+            },
+            {
+                aliases: ['html'],
+                languageId: 'html'
+            },
+            {
+                aliases: ['lua'],
+                languageId: 'lua'
+            }
+        ];
+
+        const fencedPatterns = fencedLanguages.map(({ aliases, languageId: fencedLanguageId }) => ({
+            name: `fenced_code.block.markdown.${fencedLanguageId}`,
+            begin: `^(\`{3,})\\s*(${aliases.join('|')})\\s*$`,
+            end: '^\\1\\s*$',
+            contentName: `source.${fencedLanguageId}`,
+            beginCaptures: {
+                1: { name: 'punctuation.definition.fenced_code.begin.markdown' },
+                2: { name: 'fenced_code.block.language.markdown' }
+            },
+            endCaptures: {
+                1: { name: 'punctuation.definition.fenced_code.end.markdown' }
+            },
+            patterns: getGrammar(fencedLanguageId)?.patterns ?? []
+        }));
+
+        return {
+            scopeName: 'source.markdown',
+            patterns: [
+                ...fencedPatterns,
+                {
+                    name: 'fenced_code.block.markdown',
+                    begin: '^(`{3,})(?:\\s*([^\\s`]+))?[^\\n]*$',
+                    end: '^\\1\\s*$',
+                    beginCaptures: {
+                        1: { name: 'punctuation.definition.fenced_code.begin.markdown' },
+                        2: { name: 'fenced_code.block.language.markdown' }
+                    },
+                    endCaptures: {
+                        1: { name: 'punctuation.definition.fenced_code.end.markdown' }
+                    }
+                }
+            ]
+        }
     }
 
     return undefined;

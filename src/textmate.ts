@@ -18,7 +18,8 @@ export const languageIds = [
     'kotlin',
     'swift',
     'html',
-    'lua'
+    'lua',
+    'markdown'
 ];
 
 export async function createRegistry() {
