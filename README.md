@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/version-v1.4.1-orange?style=flat-square)
+![version](https://img.shields.io/badge/version-v1.5.1-orange?style=flat-square)
 
 # Color Comments
 
@@ -12,7 +12,7 @@ e.g.
 ```js
 
 //todo: this comment will be yellow unless changed in settings
-//note: as todo this comment will be blue unless changed
+//note: as before this comment will be blue unless changed
 //fix:  as previously this one is red unless changed
 //add: as said this one is a pastel green until changed
 
@@ -38,7 +38,6 @@ console.log("// todo") //this message will not change color
 - cpp
 - csharp
 - java
-- csharp
 - go
 - rust
 - kotlin

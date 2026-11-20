@@ -3,6 +3,7 @@ import { createRegistry, tokenize } from './textmate';
 import { testCurrentFile } from './tokenTest';
 
 const markerRegex = /\b(TODO|FIX|NOTE|ADD)\b/gi;
+const doneMarkerRegex = /\b(FIX|ADD)ED\b/gi;
 
 export async function activate(context: vscode.ExtensionContext) {
     try {
@@ -54,6 +55,9 @@ export async function activate(context: vscode.ExtensionContext) {
         const enabled = vscode.workspace
             .getConfiguration('colorComments')
             .get<boolean>('enabled', true);
+        const grammaticallyDoneOn = vscode.workspace
+            .getConfiguration('colorComments')
+            .get<boolean>('gramatically-done-on', true);
 
         if (!enabled) {
             editor.setDecorations(decorations.TODO, []);
@@ -92,8 +96,9 @@ export async function activate(context: vscode.ExtensionContext) {
                 token.endIndex
             );
 
-            markerRegex.lastIndex = 0;
-            const match = markerRegex.exec(comment);
+            const match = grammaticallyDoneOn
+                ? markerRegex.exec(comment) || doneMarkerRegex.exec(comment)
+                : markerRegex.exec(comment);
 
             const start = new vscode.Position(
                 lineNumber,

@@ -47,8 +47,7 @@ export function getGrammar(languageId: string): Grammar | undefined {
         languageId === 'kotlin' ||
         languageId === 'swift' ||
         languageId === 'javascript' ||
-        languageId === 'typescript' ||
-        languageId === 'cs'
+        languageId === 'typescript'
     ) {
         return {
             scopeName: `source.${languageId}`,
@@ -111,6 +110,28 @@ export function getGrammar(languageId: string): Grammar | undefined {
         return {
             scopeName: 'source.lua',
             patterns: [
+                {
+                    name: 'string.quoted.double',
+                    begin: '"',
+                    end: '"',
+                    patterns: [
+                        {
+                            name: 'constant.character.escape',
+                            match: '\\\\.'
+                        }
+                    ]
+                },
+                {
+                    name: 'string.quoted.single',
+                    begin: '\'',
+                    end: '\'',
+                    patterns: [
+                        {
+                            name: 'constant.character.escape',
+                            match: '\\\\.'
+                        }
+                    ]
+                },
                 {
                     name: 'comment.block',
                     begin: '--\\[\\[',
@@ -187,15 +208,11 @@ export function getGrammar(languageId: string): Grammar | undefined {
             },
             {
                 aliases: ['cs', 'c#', 'csharp'],
-                languageId: 'cs'
+                languageId: 'csharp'
             },
             {
                 aliases: ['java'],
                 languageId: 'java'
-            },
-            {
-                aliases: ['cs', 'csharp', 'c\\#'],
-                languageId: 'csharp'
             },
             {
                 aliases: ['go'],
