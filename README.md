@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/version-v1.5.2-orange?style=flat-square)
+![version](https://img.shields.io/badge/version-v1.5.4-orange?style=flat-square)
 
 # Coloring Comments
 
