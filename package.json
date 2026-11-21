@@ -1,9 +1,14 @@
 {
   "name": "colorComments",
   "publisher": "pasztet211",
-  "displayName": "Color Comments",
+  "displayName": "Coloring Comments",
+  "icon": "./media/icon.png",
   "description": "Customize the colors of comments in VS Code",
   "version": "1.5.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pasztet211/color-comments.git"
+  },
   "engines": {
     "vscode": "^1.138.0"
   },
