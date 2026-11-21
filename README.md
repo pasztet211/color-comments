@@ -1,6 +1,6 @@
 ![version](https://img.shields.io/badge/version-v1.5.2-orange?style=flat-square)
 
-# Color Comments
+# Coloring Comments
 
 ## Usage:
 
