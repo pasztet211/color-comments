@@ -4,6 +4,7 @@ import { testCurrentFile } from './tokenTest';
 
 const markerRegex = /\b(TODO|FIX|NOTE|ADD)\b/i;
 const doneMarkerRegex = /\b(FIX|ADD)ED\b/i;
+const additionalMarkerRegex = /^([!+]) /;
 
 export async function activate(context: vscode.ExtensionContext) {
     try {
@@ -110,6 +111,14 @@ export async function activate(context: vscode.ExtensionContext) {
                 ? markerRegex.exec(comment) || doneMarkerRegex.exec(comment)
                 : markerRegex.exec(comment);
 
+            const prefixEnd = comment.indexOf(' ');
+            const symbol = prefixEnd !== -1
+                ? comment[prefixEnd + 1]
+                : '';
+
+            const additionalMatch = symbol === '+' || symbol === '!'
+                ? symbol
+                : null;
             const start = new vscode.Position(
                 lineNumber,
                 token.startIndex
@@ -122,9 +131,10 @@ export async function activate(context: vscode.ExtensionContext) {
 
             const range = new vscode.Range(start, end);
 
-            if (match) {
-                const marker =
-                    match[1].toUpperCase() as keyof typeof ranges;
+            if (match || additionalMatch) {
+                const marker = (additionalMatch
+                    ? additionalMatch === '+' ? 'ADD' : 'FIX'
+                    : match![1].toUpperCase()) as keyof typeof ranges;
 
                 ranges[marker].push(range);
             } else {
