@@ -46,6 +46,22 @@ export async function activate(context: vscode.ExtensionContext) {
 
         ADD: vscode.window.createTextEditorDecorationType({
             color: configuration.get<string>('addColor', '#55ff55')
+        }),
+
+        italic: vscode.window.createTextEditorDecorationType({
+            fontStyle: 'italic'
+        }),
+
+        bold: vscode.window.createTextEditorDecorationType({
+            fontWeight: 'bold'
+        }),
+
+        strikethrough: vscode.window.createTextEditorDecorationType({
+            textDecoration: 'line-through'
+        }),
+
+        hidden: vscode.window.createTextEditorDecorationType({
+            opacity: '0'
         })
         };
     }
@@ -75,6 +91,10 @@ export async function activate(context: vscode.ExtensionContext) {
             editor.setDecorations(decorations.FIX, []);
             editor.setDecorations(decorations.NOTE, []);
             editor.setDecorations(decorations.ADD, []);
+            editor.setDecorations(decorations.italic, []);
+            editor.setDecorations(decorations.bold, []);
+            editor.setDecorations(decorations.strikethrough, []);
+            editor.setDecorations(decorations.hidden, []);
 
             if (globalDecoration) {
                 editor.setDecorations(globalDecoration, []);
@@ -94,7 +114,11 @@ export async function activate(context: vscode.ExtensionContext) {
             TODO: [],
             FIX: [],
             NOTE: [],
-            ADD: []
+            ADD: [],
+            italic: [],
+            bold: [],
+            strikethrough: [],
+            hidden: []
         };
 
         for (const { lineNumber, line, token } of tokens) {
@@ -106,6 +130,39 @@ export async function activate(context: vscode.ExtensionContext) {
                 token.startIndex,
                 token.endIndex
             );
+
+            const formatting = [
+                { regex: /%([^%\n]+)%/g, decoration: 'italic', delimiter: 1 },
+                { regex: /\^([^^\n]+)\^/g, decoration: 'bold', delimiter: 1 },
+                { regex: /~([^~\n]+)~/g, decoration: 'strikethrough', delimiter: 1 }
+            ] as const;
+
+            for (const { regex, decoration, delimiter } of formatting) {
+                let formatMatch;
+
+                while ((formatMatch = regex.exec(comment)) !== null) {
+                    const matchStart = token.startIndex + formatMatch.index;
+                    const contentStart = matchStart + delimiter;
+                    const contentEnd = matchStart + formatMatch[0].length - delimiter;
+
+                    ranges[decoration].push(new vscode.Range(
+                        new vscode.Position(lineNumber, contentStart),
+                        new vscode.Position(lineNumber, contentEnd)
+                    ));
+
+                    // hide the opening and closing markers
+                    ranges.hidden.push(
+                        new vscode.Range(
+                            new vscode.Position(lineNumber, matchStart),
+                            new vscode.Position(lineNumber, contentStart)
+                        ),
+                        new vscode.Range(
+                            new vscode.Position(lineNumber, contentEnd),
+                            new vscode.Position(lineNumber, contentEnd + delimiter)
+                        )
+                    );
+                }
+            }
 
             const match = grammaticallyDoneOn
                 ? markerRegex.exec(comment) || doneMarkerRegex.exec(comment)
@@ -146,6 +203,10 @@ export async function activate(context: vscode.ExtensionContext) {
         editor.setDecorations(decorations.FIX, ranges.FIX);
         editor.setDecorations(decorations.NOTE, ranges.NOTE);
         editor.setDecorations(decorations.ADD, ranges.ADD);
+        editor.setDecorations(decorations.italic, ranges.italic);
+        editor.setDecorations(decorations.bold, ranges.bold);
+        editor.setDecorations(decorations.strikethrough, ranges.strikethrough);
+        editor.setDecorations(decorations.hidden, ranges.hidden);
 
         if (globalDecoration) {
             editor.setDecorations(globalDecoration, ranges.global);

@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/version-v1.6.5-orange?style=flat-square)
+![version](https://img.shields.io/badge/version-v1.7.5-orange?style=flat-square)
 
 # Coloring Comments
 
@@ -20,11 +20,15 @@ egg.
 // added this is also like add if you have past tense enabled
 // fixed this is also like fix if you have past tense enabled
 
+// ~text~ this is strikethrough
+// %text% this is italic
+// ^text^ this is bold
+
 console.log("// todo") //this message will not change color
 
 ```
 
-<img width="602" height="273" alt="image" src="https://github.com/user-attachments/assets/54c92655-3797-450c-b847-22d4559de56e" />
+<img width="578" height="327" alt="image" src="https://github.com/user-attachments/assets/051b1fc9-7be4-48f3-9bd1-72def9ca5e66" />
 
 - you can change all settings:
     * todo color
