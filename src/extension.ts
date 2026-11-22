@@ -61,7 +61,8 @@ export async function activate(context: vscode.ExtensionContext) {
         }),
 
         hidden: vscode.window.createTextEditorDecorationType({
-            opacity: '0'
+            opacity: '0',
+            letterSpacing: '-9px'
         })
         };
     }

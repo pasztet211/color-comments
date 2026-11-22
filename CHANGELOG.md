@@ -1,3 +1,6 @@
+# 1.7.8 coloring comments 2026-Nov-22
+- made the stylized text characters invisible and widthless
+
 # 1.7.7 coloring comments 2026-Nov-22
 - added the changelog
 
@@ -5,7 +8,9 @@
 - updated the readme image
 
 # 1.7.5 coloring comments 2026-Nov-22
-- added `~text~`, `^text^` and `%text%` support for italic strikethrough and bold
+- added `~text~` strikethrough text
+- added `^text^` bold text
+- added `%text%` italic text
 
 # 1.6.5 coloring comments 2026-Nov-22
 - added `!` and `+` support for add and fix
@@ -13,7 +18,7 @@
 # 1.5.3 - 1.5.5 coloring comments 2026-Nov-22
 - readme updates
 
-# 1.5.2
+# 1.5.2 coloring comments 2026-Nov-22
 - fixed `add` and `note`
 - added icon and changed naming for marketplace release
 
