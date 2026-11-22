@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/version-v1.5.5-orange?style=flat-square)
+![version](https://img.shields.io/badge/version-v1.6.5-orange?style=flat-square)
 
 # Coloring Comments
 
@@ -13,6 +13,12 @@ egg.
 //note: as before this comment will be blue unless changed
 //fix:  as previously this one is red unless changed
 //add: as said this one is a pastel green until changed
+
+// you can also do:
+// + this is like add
+// ! this is like fix
+// added this is also like add if you have past tense enabled
+// fixed this is also like fix if you have past tense enabled
 
 console.log("// todo") //this message will not change color
 
