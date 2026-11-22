@@ -20,6 +20,8 @@ console.log("// todo") //this message will not change color
 
 ```
 
+<img width="567" height="161" alt="image" src="https://github.com/user-attachments/assets/dd2cfecf-9f2d-431a-8c64-7e3ae257a0bd" />
+
 - you can change all settings:
     * todo color
     * fix color
