@@ -1,13 +1,11 @@
-![version](https://img.shields.io/badge/version-v1.5.4-orange?style=flat-square)
+![version](https://img.shields.io/badge/version-v1.5.5-orange?style=flat-square)
 
 # Coloring Comments
 
-## Usage:
-
 - the extension changes the color of certain comments if they have
-  one of the colored words
+  one of the detectable words
 
-e.g.
+egg.
 
 ```js
 
@@ -30,7 +28,9 @@ console.log("// todo") //this message will not change color
     * global non special comment color
     * past tense words
 
-- you can disable the extension in its settings or with `Color Comments: Disable`
+- you can disable the extension in its settings or with `Coloring Comments: Disable`
+- you can reanable the extension using `Coloring Comments: Enable`
+- you can access the settings with `Coloring Comments: Open Settings`
 
 ## the extension has support for
 

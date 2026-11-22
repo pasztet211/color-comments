@@ -1,10 +1,11 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "colorComments",
   "publisher": "pasztet211",
   "displayName": "Coloring Comments",
   "icon": "./media/icon.png",
   "description": "Customize the colors of comments in VS Code",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/pasztet211/color-comments.git"
@@ -13,7 +14,17 @@
     "vscode": "^1.138.0"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Formatters"
+  ],
+  "keywords": [
+    "comments",
+    "Comments",
+    "Comment",
+    "colors",
+    "Customize",
+    "customization",
+    "improvement"
   ],
   "activationEvents": [
     "onStartupFinished"
@@ -64,23 +75,23 @@
     "commands": [
       {
         "command": "colorComments.reload",
-        "title": "Color Comments: Reload"
+        "title": "Coloring Comments: Reload"
       },
       {
         "command": "colorComments.enable",
-        "title": "Color Comments: Enable"
+        "title": "Coloring Comments: Enable"
       },
       {
         "command": "colorComments.disable",
-        "title": "Color Comments: Disable"
+        "title": "Coloring Comments: Disable"
       },
       {
         "command": "colorComments.openSettings",
-        "title": "Color Comments: Open Settings"
+        "title": "Coloring Comments: Open Settings"
       },
       {
         "command": "colorComments.tokenTest",
-        "title": "Color Comments: Token Test"
+        "title": "Coloring Comments: Token Test"
       }
     ]
   },

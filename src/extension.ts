@@ -162,7 +162,7 @@ export async function activate(context: vscode.ExtensionContext) {
             updateGlobalDecoration();
             updateActiveEditor();
             vscode.window.showInformationMessage(
-                'Color Comments reloaded.'
+                'Coloring Comments reloaded.'
             );
         }
     );
@@ -181,7 +181,7 @@ export async function activate(context: vscode.ExtensionContext) {
             updateActiveEditor();
 
             vscode.window.showInformationMessage(
-                'Color Comments enabled.'
+                'Coloring Comments enabled.'
             );
         }
     );
@@ -200,7 +200,7 @@ export async function activate(context: vscode.ExtensionContext) {
             updateActiveEditor();
 
             vscode.window.showInformationMessage(
-                'Color Comments disabled.'
+                'Coloring Comments disabled.'
             );
         }
     );
