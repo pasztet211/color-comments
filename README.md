@@ -26,6 +26,7 @@ console.log("// todo") //this message will not change color
     * note color
     * add color
     * global non special comment color
+    * past tense words
 
 - you can disable the extension in its settings or with `Color Comments: Disable`
 
