@@ -28,7 +28,7 @@ console.log("// todo") //this message will not change color
 
 ```
 
-<img width="578" height="327" alt="image" src="https://github.com/user-attachments/assets/051b1fc9-7be4-48f3-9bd1-72def9ca5e66" />
+<img width="561" height="339" alt="image" src="https://github.com/user-attachments/assets/cc561305-5d05-4db6-8d7b-5eead35b6081" />
 
 - you can change all settings:
     * todo color
